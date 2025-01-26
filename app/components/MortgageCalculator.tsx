@@ -12,6 +12,7 @@ import {
 import { useLanguage } from "../contexts/LanguageContext";
 import { useMortgageCalculator } from "../hooks/useMortgageCalculator";
 import { formatNumberWithCommas } from "../utils/formatNumber";
+import { MathCalculatorInput } from "@/app/components/MathCalculatorInput";
 
 type MortgageCalculatorProps = {
   propertyPrice: number;
@@ -59,6 +60,22 @@ export const MortgageCalculator = ({
   setMaintenanceCosts,
 }: MortgageCalculatorProps) => {
   const { t } = useLanguage();
+  const [showWarning, setShowWarning] = useState(false);
+  const isInitialInvestmentTooLow = initialInvestment < propertyPrice * 0.1;
+
+  const handleInitialInvestmentBlur = () => {
+    setShowWarning(true);
+  };
+
+  const handleSetMinimumInvestment = () => {
+    const minInvestment = propertyPrice * 0.1;
+    setInitialInvestment(minInvestment);
+    setShowWarning(false);
+  };
+
+  const handleInitialInvestmentFocus = () => {
+    setShowWarning(false);
+  };
 
   const results = useMortgageCalculator(
     propertyPrice,
@@ -95,13 +112,11 @@ export const MortgageCalculator = ({
             >
               <Minus className="h-4 w-4" />
             </Button>
-            <Input
+            <MathCalculatorInput
               id="propertyPrice"
               type="text"
-              value={formatNumberWithCommas(propertyPrice)}
-              onChange={(e) =>
-                setPropertyPrice(Number(e.target.value.replace(/\D/g, "")))
-              }
+              value={propertyPrice}
+              onChange={(e) => setPropertyPrice(Number(e.target.value))}
               className="flex-grow"
             />
             <Button
@@ -121,14 +136,18 @@ export const MortgageCalculator = ({
             >
               <Minus className="h-4 w-4" />
             </Button>
-            <Input
+            <MathCalculatorInput
               id="initialInvestment"
               type="text"
-              value={formatNumberWithCommas(initialInvestment)}
-              onChange={(e) =>
-                setInitialInvestment(Number(e.target.value.replace(/\D/g, "")))
-              }
-              className="flex-grow"
+              value={initialInvestment}
+              onChange={(e) => setInitialInvestment(Number(e.target.value))}
+              onBlur={handleInitialInvestmentBlur}
+              onFocus={handleInitialInvestmentFocus}
+              className={`flex-grow ${
+                showWarning && isInitialInvestmentTooLow
+                  ? "border-yellow-500"
+                  : ""
+              }`}
             />
             <Button
               onClick={() => handleInitialInvestmentChange(1000)}
@@ -137,7 +156,23 @@ export const MortgageCalculator = ({
               <Plus className="h-4 w-4" />
             </Button>
           </div>
+          {showWarning && isInitialInvestmentTooLow && (
+            <div className="flex items-center space-x-2 mt-1">
+              <p className="text-sm text-yellow-500">
+                {t("initialInvestmentWarning")}
+              </p>
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-xs border-yellow-500 text-yellow-500 hover:bg-yellow-50"
+                onClick={handleSetMinimumInvestment}
+              >
+                {t("setMinimumInvestment")}
+              </Button>
+            </div>
+          )}
         </div>
+
         <div className="space-y-2">
           <Label htmlFor="interestRate">{t("interestRate")}</Label>
           <Input
@@ -155,7 +190,10 @@ export const MortgageCalculator = ({
             type="number"
             step="1"
             value={mortgageTerm}
-            onChange={(e) => setMortgageTerm(Number(e.target.value))}
+            onChange={(e) => {
+              const newValue = Math.min(100, Number(e.target.value));
+              setMortgageTerm(newValue);
+            }}
           />
         </div>
         <div className="space-y-2">
@@ -205,14 +243,12 @@ export const MortgageCalculator = ({
                   <Label htmlFor="initialCostsFixed">
                     {t("initialCostsFixed")}
                   </Label>
-                  <Input
+                  <MathCalculatorInput
                     id="initialCostsFixed"
                     type="text"
-                    value={formatNumberWithCommas(initialCostsFixed)}
+                    value={initialCostsFixed}
                     onChange={(e) =>
-                      setInitialCostsFixed(
-                        Number(e.target.value.replace(/\D/g, ""))
-                      )
+                      setInitialCostsFixed(Number(e.target.value))
                     }
                   />
                 </div>
@@ -252,14 +288,12 @@ export const MortgageCalculator = ({
                   <Label htmlFor="annualCostsFixed">
                     {t("annualCostsFixed")}
                   </Label>
-                  <Input
+                  <MathCalculatorInput
                     id="annualCostsFixed"
                     type="text"
-                    value={formatNumberWithCommas(annualCostsFixed)}
+                    value={annualCostsFixed}
                     onChange={(e) =>
-                      setAnnualCostsFixed(
-                        Number(e.target.value.replace(/\D/g, ""))
-                      )
+                      setAnnualCostsFixed(Number(e.target.value))
                     }
                   />
                 </div>

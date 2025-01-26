@@ -9,13 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { useLanguage } from "../contexts/LanguageContext";
 import { MortgageCalculator } from "./MortgageCalculator";
 import { InvestmentCalculator } from "./InvestmentCalculator";
@@ -23,9 +17,10 @@ import { useMortgageCalculator } from "../hooks/useMortgageCalculator";
 import { useInvestmentCalculator } from "../hooks/useInvestmentCalculator";
 import { Footer } from "./Footer";
 import ResultsDisplay from "./ResultsDisplay";
+import { FireCalculator } from "@/app/components/FireCalculator";
 
 export default function LoanVsInvestmentCalculator() {
-  const { t, language, setLanguage } = useLanguage();
+  const { t } = useLanguage();
 
   // Mortgage/Loan state
   const [propertyPrice, setPropertyPrice] = useState(300000);
@@ -67,21 +62,6 @@ export default function LoanVsInvestmentCalculator() {
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-8">
-      <div className="flex justify-end">
-        <Select
-          value={language}
-          onValueChange={(value: "en" | "es") => setLanguage(value)}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder={t("language")} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="en">English</SelectItem>
-            <SelectItem value="es">Español</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
       <Card>
         <CardHeader>
           <CardTitle>{t("mortgageTitle")}</CardTitle>
@@ -149,7 +129,7 @@ export default function LoanVsInvestmentCalculator() {
       )}
 
       <Separator />
-
+      <FireCalculator />
       <Footer />
     </div>
   );

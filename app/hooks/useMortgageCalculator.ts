@@ -27,6 +27,7 @@ export const useMortgageCalculator = (
     profitPercentage: number;
     annualAdjustedPercentage: number;
     propertyPrice: number;
+    initialInvestment: number;
   } | null>(null);
 
   useEffect(() => {
@@ -77,7 +78,8 @@ export const useMortgageCalculator = (
       propertyPrice * Math.pow(1 + propertyRevaluation / 100, mortgageTerm);
     const totalProfit =
       finalPropertyValue - propertyPrice - totalInterest - totalAdditionalCosts;
-    const profitPercentage = (totalProfit / initialInvestment) * 100;
+    const profitPercentage = (totalProfit / (initialInvestment || 1)) * 100;
+    console.log(totalProfit, initialInvestment, profitPercentage);
     const annualAdjustedPercentage =
       (Math.pow(1 + profitPercentage / 100, 1 / mortgageTerm) - 1) * 100;
 
@@ -96,6 +98,7 @@ export const useMortgageCalculator = (
       profitPercentage: profitPercentage || 0,
       annualAdjustedPercentage: annualAdjustedPercentage || 0,
       propertyPrice: propertyPrice || 0,
+      initialInvestment: initialInvestment || 0,
     });
   }, [
     propertyPrice,

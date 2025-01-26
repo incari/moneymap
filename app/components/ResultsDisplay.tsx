@@ -19,12 +19,6 @@ type ResultsDisplayProps = {
 export default function ResultsDisplay({ results, type }: ResultsDisplayProps) {
   const { t } = useLanguage();
 
-  console.log(results);
-  const formatNumber = (num: number | undefined | null) => {
-    if (num === undefined || num === null || isNaN(num)) return "N/A";
-    return formatNumberWithCommas(Math.round(num));
-  };
-
   const formatCurrency = (num: number) => {
     return `$${formatNumberWithCommas(Math.round(num))}`;
   };
@@ -37,20 +31,22 @@ export default function ResultsDisplay({ results, type }: ResultsDisplayProps) {
     }).format(num / 100);
   };
 
-  console.log(results);
   if (type === "mortgage") {
     return (
       <div className="bg-blue-50 p-6 rounded-lg">
         <h3 className="text-xl font-bold mb-4">{t("mortgageResults")}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <h4 className="font-semibold">{t("initialExpenses")}</h4>
             <p>
               {t("propertyPrice")}: {formatCurrency(results.propertyPrice)}
             </p>
-            <p>
-              {t("totalExpenses")}: {formatCurrency(results.initialCostsPaid)}
-            </p>
+            <h4 className="font-semibold">
+              {t("initialExpenses") + " "}{" "}
+              {formatCurrency(
+                results.initialCostsPaid + results.initialInvestment
+              )}
+            </h4>
+
             <ul className="list-disc list-inside">
               <li>
                 {t("initialInvestment")}:{" "}
@@ -62,7 +58,15 @@ export default function ResultsDisplay({ results, type }: ResultsDisplayProps) {
             </ul>
           </div>
           <div className="space-y-2">
-            <h4 className="font-semibold">{t("monthlyPayments")}</h4>
+            <h4 className="font-semibold">
+              {t("monthlyPayments") + " "} (
+              {formatCurrency(
+                (results.annualCostsPaid + results.maintenancePaid) /
+                  (results.yearlyData.length * 12) +
+                  results.monthlyPayment
+              )}
+              )
+            </h4>
             <p>
               {t("mortgage")}: {formatCurrency(results.monthlyPayment)}
             </p>

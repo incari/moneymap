@@ -9,6 +9,16 @@ export const Footer = () => {
       <div className="container mx-auto flex justify-between items-center">
         <p className="text-sm text-gray-600 flex gap-2">
           {t("madeBy")}
+
+          <a
+            href="https://www.linkedin.com/in/racana/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-600"
+          >
+            Incari
+          </a>
+          {t("madeUsing")}
           <Link
             href="https:v0.dev"
             target="__blank"

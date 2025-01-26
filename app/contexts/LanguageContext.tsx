@@ -15,16 +15,18 @@ const translations = {
   en: {
     title: "Loan vs Investment Calculator",
     name: "Money Map",
-    madeBy: "Made by Incari with AI using",
+    madeBy: "Made by",
+    madeUsing: "with AI using",
     subtitle:
       "Compare mortgage and investment scenarios to make smarter financial decisions",
+    /* Mortgage */
     mortgageTitle: "Mortgage/Loan Calculator",
     mortgageDescription:
       "Calculate the costs of buying a property with a mortgage",
-    propertyPrice: "Property Price ($)",
-    initialInvestment: "Initial Investment ($)",
+    propertyPrice: "Property Price ",
+    initialInvestment: "Initial Investment ",
     interestRate: "Interest Rate (%)",
-    mortgageTerm: "Mortgage Term (years)",
+    mortgageTerm: "Mortgage Term (years , max 100)",
     maintenanceCost: "Yearly Maintenance Costs (%)",
     yearlyTaxes: "Yearly Taxes (%)",
     monthlyPayment: "Monthly Payment",
@@ -65,7 +67,8 @@ const translations = {
     propertyValueAtEnd: "Property Value at End of Term",
     totalProfit: "Total Profit",
     profitPercentage: "Profit Percentage",
-    fireCalculatorTitle: "FIRE Calculator",
+    fireCalculatorTitle:
+      "FIRE Calculator (Financial Independence, Retire Early)",
     fireCalculatorDescription:
       "Calculate your Financial Independence, Retire Early (FIRE) number",
     monthlyWithdrawal: "Monthly Withdrawal",
@@ -74,7 +77,7 @@ const translations = {
     totalExpenses: "Total Expenses",
     initialCosts: "Initial Costs",
     totalTaxes: "Total Taxes",
-    monthlyPayments: "Monthly Payments (Total)",
+    monthlyPayments: "Monthly Payments",
     mortgage: "Mortgage",
     annualExpensesMonthly: "Annual Expenses (Monthly)",
     assets: "Assets (Price - Expenses)",
@@ -85,20 +88,38 @@ const translations = {
     annualAdjustedPercentage: "Annual Adjusted Percentage",
     mortgageResults: "Mortgage Results",
     investmentResults: "Investment Results",
+    initialInvestmentWarning:
+      "Normally banks require at least 10% of the property price",
+    monthlyExpenses: "Monthly Expenses ($)",
+    yearsToRetire: "Years to Retire",
+    currentSavings: "Current Savings ($)",
+    /* FIRE */
+
+    fireResults: "FIRE Results",
+    fireNumber: "FIRE Number",
+    projectedSavings: "Projected Savings",
+    fireGoalAchieved:
+      "Congratulations! You're on track to achieve your FIRE goal.",
+    fireGoalNotAchieved:
+      "You may need to adjust your plan to reach your FIRE goal.",
+    adjustMonthlyAddition: "Adjust Monthly Addition",
+    fireDescription: "Discover your FIRE number for financial freedom",
   },
   es: {
     title: "Calculadora de Préstamo vs Inversión",
     name: "Money Map",
     subtitle:
       "Compara escenarios de hipoteca e inversión para tomar decisiones financieras más inteligentes",
-    madeBy: "Hecho por Incari con AI usando",
+    madeBy: "Hecho por",
+    madeUsing: "con AI usando",
+    /* Mortgage */
     mortgageTitle: "Calculadora de Hipoteca/Préstamo",
     mortgageDescription:
       "Calcula los costos de comprar una propiedad con una hipoteca",
-    propertyPrice: "Precio de la Propiedad (€)",
-    initialInvestment: "Inversión Inicial (€)",
+    propertyPrice: "Precio de la Propiedad",
+    initialInvestment: "Inversión Inicial",
     interestRate: "Tasa de Interés (%)",
-    mortgageTerm: "Plazo de la Hipoteca (años)",
+    mortgageTerm: "Plazo de la Hipoteca (años, max 100)",
     maintenanceCost: "Costos de Mantenimiento Anuales (%)",
     yearlyTaxes: "Impuestos Anuales (%)",
     monthlyPayment: "Pago Mensual",
@@ -107,8 +128,8 @@ const translations = {
     indexFundTitle: "Calculadora de Fondo Indexado",
     indexFundDescription:
       "Calcula los retornos potenciales de invertir en un fondo indexado",
-    initialAmount: "Monto Inicial (€)",
-    monthlyAddition: "Adición Mensual (€)",
+    initialAmount: "Monto Inicial ($)",
+    monthlyAddition: "Adición Mensual ($)",
     expectedReturn: "Retorno Anual Esperado (%)",
     totalValue: "Valor Total",
     language: "Idioma",
@@ -141,16 +162,11 @@ const translations = {
     propertyValueAtEnd: "Valor de la Propiedad al Final del Plazo",
     totalProfit: "Beneficio Total",
     profitPercentage: "Porcentaje de Beneficio",
-    fireCalculatorTitle: "Calculadora FIRE",
-    fireCalculatorDescription:
-      "Calcula tu número de Independencia Financiera, Retiro Anticipado (FIRE)",
-    monthlyWithdrawal: "Retiro Mensual",
-    totalRequired: "Total Requerido para FIRE",
     initialExpenses: "Gastos Iniciales",
     totalExpenses: "Gastos Totales",
     initialCosts: "Gastos Iniciales",
     totalTaxes: "Total Impuestos",
-    monthlyPayments: "Pagos Mensuales (Total)",
+    monthlyPayments: "Pagos Mensuales",
     mortgage: "Hipoteca",
     annualExpensesMonthly: "Gastos Anuales (Mensual)",
     assets: "Activos (Precio - Gastos)",
@@ -164,6 +180,25 @@ const translations = {
     investmentResults: "Resultados de la Inversión",
     year: "Año",
     mortgageResults: "Resultados de la Hipoteca",
+    initialInvestmentWarning:
+      "Normalmente los bancos requieren un mínimo del 10% del precio de la propiedad",
+    setMinimumInvestment: "Ajustar",
+    /* FIRE */
+    fireCalculatorTitle:
+      "Calculadora FIRE (Financial Independence, Retire Early)",
+    monthlyExpenses: "Gastos Mensuales ($)",
+    yearsToRetire: "Años para Retirarse",
+    currentSavings: "Ahorros Actuales ($)",
+    fireResults: "Resultados FIRE",
+    fireNumber: "Número FIRE",
+    fireDescription: "Descubre tu número FIRE para la libertad financiera",
+
+    projectedSavings: "Ahorros Proyectados",
+    fireGoalAchieved:
+      "¡Felicidades! Estás en camino de alcanzar tu objetivo FIRE.",
+    fireGoalNotAchieved:
+      "Es posible que necesites ajustar tu plan para alcanzar tu objetivo FIRE.",
+    adjustMonthlyAddition: "Ajustar adición mensual",
   },
 };
 
